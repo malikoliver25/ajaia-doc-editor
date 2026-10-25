@@ -70,3 +70,5 @@ Supported types: `.txt` and `.md` only, max **1 MB**, must be UTF-8 (stated in t
 ## Known limitations
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the full prioritization/tradeoff notes. Headlines: mocked email login with no expiry, last-write-wins autosave (no conflict handling), no pagination, and on free-tier hosting the SQLite disk is ephemeral (DB re-seeds on boot).
+
+Note on the live demo: free-tier web services sleep after ~15 minutes idle and take 1–2 minutes to wake on the first request — a slow first load is the platform waking up, not a broken deploy.
