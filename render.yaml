@@ -3,7 +3,7 @@ services:
     name: ajaia-doc-editor
     runtime: docker
     plan: free
-    healthCheckPath: /api/auth/me
+    healthCheckPath: /api/nonexistent
     envVars:
       - key: DATABASE_URL
         value: sqlite:////app/data/app.db
