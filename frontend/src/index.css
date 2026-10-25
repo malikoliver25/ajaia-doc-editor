@@ -1,0 +1,269 @@
+:root {
+  /* Ajaia brand tokens (from ajaia.ai) */
+  --navy: #001d6b;
+  --navy-2: #001244;
+  --navy-3: #00091f;
+  --navy-4: #00060f;
+  --ink-700: #0b2e8e;
+  --sky: #97c2f8;
+  --sky-soft: #c4dcfb;
+  --sky-50: #f1f7ff;
+  --paper: #f1f7ff;
+  --muted-blue: #aebfe2;
+  --muted-2: #8093c4;
+  --ink-subtle: #6b7280;
+  --ink: #1b1c1c;
+  --line: rgba(151, 194, 248, 0.14);
+  --line-2: rgba(151, 194, 248, 0.26);
+  --accent: hsl(210 90% 70%);
+  --error: #c74634;
+  --success: #2e8b57;
+
+  --font-head: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-head);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+h1, h2, h3 { font-family: var(--font-head); }
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  background: linear-gradient(180deg, var(--navy), var(--navy-2));
+  color: var(--sky);
+  border-bottom: 1px solid var(--line-2);
+}
+
+.app-header .brand {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.app-header .spacer { flex: 1; }
+
+.app-header .who { color: var(--muted-blue); font-size: 14px; }
+
+.app-header button {
+  background: transparent;
+  color: var(--sky);
+  border-color: var(--line-2);
+}
+.app-header button:hover { background: #ffffff0e; color: #fff; }
+
+button {
+  font: inherit;
+  font-size: 14px;
+  padding: 7px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--navy);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+button:hover { background: var(--sky-50); border-color: var(--sky); }
+
+button.primary {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+button.primary:hover { background: var(--ink-700); }
+
+button.danger { color: var(--error); border-color: rgba(199, 70, 52, 0.4); }
+button.danger:hover { background: #fdf3f1; }
+
+input[type="text"], input[type="email"], select {
+  font: inherit;
+  padding: 7px 10px;
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(151, 194, 248, 0.18), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(11, 46, 142, 0.25), transparent 45%),
+    linear-gradient(180deg, var(--navy-2), var(--navy-3));
+  color: #fff;
+}
+
+.login-page h1 { margin: 0; font-size: 40px; color: #fff; }
+
+.login-page .tagline { color: var(--muted-blue); margin: 0; }
+
+.login-card {
+  background: var(--navy-4);
+  border: 1px solid var(--line-2);
+  border-radius: 14px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  box-shadow: 0 30px 60px -30px rgba(0, 6, 15, 0.8);
+}
+
+.login-buttons { display: flex; gap: 12px; }
+
+.login-buttons button { font-size: 15px; padding: 10px 20px; }
+
+.login-buttons button:hover { background: var(--ink-700); color: #fff; }
+
+.login-form { display: flex; gap: 10px; }
+
+.login-form input { min-width: 260px; }
+
+.login-page .hint { color: var(--muted-2); font-size: 13px; }
+
+.error-text { color: var(--sky); font-size: 14px; }
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: #fdf3f1;
+  border: 1px solid rgba(199, 70, 52, 0.35);
+  color: var(--error);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.doc-list-section {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px 16px 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 30px -22px rgba(0, 29, 107, 0.4);
+}
+
+.doc-list-section h2 {
+  font-size: 16px;
+  color: var(--navy);
+  margin: 12px 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.doc-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.doc-row:last-child { border-bottom: none; }
+
+.doc-row a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 500;
+  flex: 1;
+}
+
+.doc-row a:hover { color: var(--ink-700); }
+
+.doc-row .updated { color: var(--ink-subtle); font-size: 13px; }
+
+.doc-row .role-badge {
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--sky-50);
+  color: var(--navy);
+  border: 1px solid var(--line-2);
+}
+
+.empty-state { color: var(--ink-subtle); font-size: 14px; padding: 12px 8px; }
+
+.list-actions { display: flex; gap: 12px; margin-bottom: 20px; }
+
+.editor-page { max-width: 860px; margin: 0 auto; padding: 20px; }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.title-row input {
+  flex: 1;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: var(--font-head);
+  padding: 8px 10px;
+}
+
+.doc-meta { color: var(--ink-subtle); font-size: 13px; margin-bottom: 10px; }
+
+.save-status { font-size: 13px; color: var(--ink-subtle); min-width: 90px; text-align: right; }
+.save-status.saving { color: var(--ink-700); }
+.save-status.saved { color: var(--success); }
+.save-status.error { color: var(--error); cursor: pointer; }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  padding: 8px;
+  margin-bottom: 12px;
+  background: var(--sky-50);
+}
+
+.toolbar button { padding: 4px 10px; font-size: 14px; }
+.toolbar button.active {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--sky);
+}
+
+.tiptap {
+  outline: none;
+  min-height: 320px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+}
+.tiptap:focus { border-color: var(--sky); }
+
+.tiptap h1 { font-size: 26px; }
+.tiptap h2 { font-size: 21px; }
+.tiptap h3 { font-size: 17px; }
+.tiptap ul, .tiptap ol { padding-left: 24px; }
+
+.not-found { text-align: center; padding-top: 8vh; }
+.not-found h1 { font-weight: 600; color: var(--navy); }
