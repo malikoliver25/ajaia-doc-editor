@@ -35,7 +35,22 @@ function token(): string | null {
 
 export function storedUser(): User | null {
   const raw = localStorage.getItem(USER_KEY);
-  return raw ? (JSON.parse(raw) as User) : null;
+  if (!raw) return null;
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    if (
+      typeof parsed === "object" &&
+      parsed !== null &&
+      typeof (parsed as { id?: unknown }).id === "number" &&
+      typeof (parsed as { email?: unknown }).email === "string" &&
+      typeof (parsed as { name?: unknown }).name === "string"
+    ) {
+      return parsed as User;
+    }
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {

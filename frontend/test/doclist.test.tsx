@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom/vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi, beforeEach } from "vitest";
 import { MemoryRouter } from "react-router-dom";
@@ -48,13 +49,16 @@ describe("DocumentList owned vs shared sections", () => {
 
     await waitFor(() => expect(screen.getByText("My own doc")).toBeTruthy());
 
-    const owned = screen.getByText("My documents").closest("section, div")!;
-    const shared = screen.getByText("Shared with me").closest("section, div")!;
+    const owned = screen.getByText("My documents").closest("div")!;
+    const shared = screen.getByText("Shared with me").closest("div")!;
     expect(owned).toBeTruthy();
     expect(shared).toBeTruthy();
 
-    // owned doc sits before shared doc in the DOM (owned section first)
-    expect(owned.compareDocumentPosition(shared) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // each doc lives inside its own section (containment, not just order)
+    expect(owned).toContainElement(screen.getByText("My own doc"));
+    expect(shared).toContainElement(screen.getByText("Shared to me"));
+    expect(owned).not.toContainElement(screen.getByText("Shared to me"));
+    expect(shared).not.toContainElement(screen.getByText("My own doc"));
 
     // shared row shows role badge and owner name
     expect(screen.getByText("editor")).toBeTruthy();

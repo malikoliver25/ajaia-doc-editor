@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Editor, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Underline from "@tiptap/extension-underline";
 import { useNavigate, useParams } from "react-router-dom";
 import { ApiError, deleteDocument, getDocument, patchDocument } from "../api";
 import { addShare, listShares, removeShare } from "../api";
@@ -84,7 +83,7 @@ export default function EditorPage() {
   }, []);
 
   const editor = useEditor({
-    extensions: [StarterKit, Underline],
+    extensions: [StarterKit],
     content: { type: "doc", content: [] },
     editable: false,
     onUpdate: ({ editor }) => {
@@ -193,6 +192,17 @@ export default function EditorPage() {
     }
   }
 
+  async function onRoleChange(email: string, role: "editor" | "viewer") {
+    if (!doc) return;
+    setShareError("");
+    try {
+      await addShare(doc.id, email, role); // upsert: updates role for existing share
+      setShares(await listShares(doc.id));
+    } catch (e) {
+      setShareError(e instanceof ApiError ? e.message : "Failed to update role");
+    }
+  }
+
   async function onRemoveShare(userId: number) {
     if (!doc) return;
     setShareError("");
@@ -274,7 +284,10 @@ export default function EditorPage() {
                 <span>
                   {s.user.name} ({s.user.email})
                 </span>
-                <select value={s.role} disabled>
+                <select
+                  value={s.role}
+                  onChange={(e) => void onRoleChange(s.user.email, e.target.value as "editor" | "viewer")}
+                >
                   <option value="editor">editor</option>
                   <option value="viewer">viewer</option>
                 </select>

@@ -28,7 +28,7 @@
 - Sharing: owner-only dialog, add/update/remove, editor vs viewer roles
 - Owned vs shared list sections with role badges and owner names; empty states
 - Access enforcement: viewers read-only (toolbar hidden), editors can't delete/share, strangers get 404
-- Single Docker image serving API + SPA on one origin; deployed to Render
+- Single Docker image serving API + SPA on one origin; built and verified locally, live deploy pending the Render click-through above
 
 ## Tests
 
