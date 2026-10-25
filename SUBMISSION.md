@@ -4,7 +4,7 @@
 
 **Walkthrough video:** skipped (per time constraint). The screenshots below plus this document cover the same ground.
 
-**Demo data on the live site:** in addition to the seeded accounts, Alice owns a pre-shared sample doc ("Q3 AI Enablement Plan", shared with Bob as editor) so the sharing flow is immediately visible. Note the free-tier disk is ephemeral — data resets to this state on each deploy.
+**Demo data on the live site:** the DB re-seeds on every deploy (free-tier ephemeral disk), so the live site starts from the seeded state: the three accounts plus Alice's sample "Welcome to Ajaia" doc. To see the sharing flow, log in as Alice, create a doc, click Share, and add `bob@demo.test` as editor/viewer — or run `node frontend/scripts/screenshot.mjs` from `frontend/` to provision a formatted demo doc and share in one step. The screenshots in `screenshots/` show that flow captured live.
 
 ## What's in the folder
 
