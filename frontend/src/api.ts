@@ -109,3 +109,33 @@ export async function patchDocument(
 export async function deleteDocument(id: string): Promise<void> {
   return request<void>(`/api/documents/${id}`, { method: "DELETE" });
 }
+
+export async function importDocument(file: File): Promise<DocFull> {
+  const form = new FormData();
+  form.append("file", file);
+  return request("/api/documents/import", { method: "POST", body: form });
+}
+
+export interface Share {
+  user: User;
+  role: "editor" | "viewer";
+}
+
+export async function listShares(documentId: string): Promise<Share[]> {
+  return request(`/api/documents/${documentId}/shares`);
+}
+
+export async function addShare(
+  documentId: string,
+  email: string,
+  role: "editor" | "viewer",
+): Promise<Share> {
+  return request(`/api/documents/${documentId}/shares`, {
+    method: "POST",
+    body: JSON.stringify({ email, role }),
+  });
+}
+
+export async function removeShare(documentId: string, userId: number): Promise<void> {
+  return request<void>(`/api/documents/${documentId}/shares/${userId}`, { method: "DELETE" });
+}

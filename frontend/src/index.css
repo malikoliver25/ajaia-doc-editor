@@ -267,3 +267,38 @@ input[type="text"], input[type="email"], select {
 
 .not-found { text-align: center; padding-top: 8vh; }
 .not-found h1 { font-weight: 600; color: var(--navy); }
+
+.share-dialog {
+  background: #fff;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 16px 40px -24px rgba(0, 29, 107, 0.4);
+}
+
+.share-dialog h3 { margin: 0 0 10px; color: var(--navy); }
+
+.share-list { list-style: none; padding: 0; margin: 0 0 12px; }
+
+.share-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.share-list li span:first-child { flex: 1; }
+
+.share-form { display: flex; gap: 10px; margin-bottom: 10px; }
+.share-form input { flex: 1; }
+
+.owner-name { color: var(--ink-subtle); font-size: 13px; }
+
+.hint-inline { color: var(--ink-subtle); font-size: 13px; align-self: center; }
+
+.role-badge {
+  font-size: 12px;
+  text-transform: capitalize;
+}

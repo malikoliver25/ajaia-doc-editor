@@ -4,7 +4,8 @@ import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import { useNavigate, useParams } from "react-router-dom";
 import { ApiError, deleteDocument, getDocument, patchDocument } from "../api";
-import type { DocFull } from "../api";
+import { addShare, listShares, removeShare } from "../api";
+import type { DocFull, Share } from "../api";
 import { useLogout } from "./Documents";
 
 type SaveState = "idle" | "saving" | "saved" | "error";
@@ -53,6 +54,11 @@ export default function EditorPage() {
   const [titleError, setTitleError] = useState("");
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [banner, setBanner] = useState("");
+  const [shareOpen, setShareOpen] = useState(false);
+  const [shares, setShares] = useState<Share[] | null>(null);
+  const [shareFormEmail, setShareFormEmail] = useState("");
+  const [shareFormRole, setShareFormRole] = useState<"editor" | "viewer">("editor");
+  const [shareError, setShareError] = useState("");
 
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingContent = useRef<object | null>(null);
@@ -163,6 +169,41 @@ export default function EditorPage() {
     }
   }
 
+  async function openShareDialog() {
+    setShareOpen(true);
+    setShareError("");
+    if (!doc) return;
+    try {
+      setShares(await listShares(doc.id));
+    } catch (e) {
+      setShares([]);
+      setShareError(e instanceof ApiError ? e.message : "Failed to load shares");
+    }
+  }
+
+  async function onAddShare() {
+    if (!doc) return;
+    setShareError("");
+    try {
+      await addShare(doc.id, shareFormEmail.trim().toLowerCase(), shareFormRole);
+      setShares(await listShares(doc.id));
+      setShareFormEmail("");
+    } catch (e) {
+      setShareError(e instanceof ApiError ? e.message : "Failed to add share");
+    }
+  }
+
+  async function onRemoveShare(userId: number) {
+    if (!doc) return;
+    setShareError("");
+    try {
+      await removeShare(doc.id, userId);
+      setShares(await listShares(doc.id));
+    } catch (e) {
+      setShareError(e instanceof ApiError ? e.message : "Failed to remove share");
+    }
+  }
+
   if (loadError === 404) {
     return (
       <div className="not-found">
@@ -220,7 +261,60 @@ export default function EditorPage() {
           {saveState === "idle" && ""}
         </span>
         {doc.role === "viewer" && <span className="save-status">Read-only (viewer)</span>}
+        {doc.role === "owner" && <button onClick={() => void openShareDialog()}>Share</button>}
       </div>
+
+      {shareOpen && doc.role === "owner" && (
+        <div className="share-dialog">
+          <h3>Share this document</h3>
+          {shareError && <p className="error-text">{shareError}</p>}
+          <ul className="share-list">
+            {(shares ?? []).map((s) => (
+              <li key={s.user.id}>
+                <span>
+                  {s.user.name} ({s.user.email})
+                </span>
+                <select value={s.role} disabled>
+                  <option value="editor">editor</option>
+                  <option value="viewer">viewer</option>
+                </select>
+                <button className="danger" onClick={() => void onRemoveShare(s.user.id)}>
+                  Remove
+                </button>
+              </li>
+            ))}
+            {shares !== null && shares.length === 0 && (
+              <li className="empty-state">Not shared with anyone yet.</li>
+            )}
+          </ul>
+          <form
+            className="share-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              void onAddShare();
+            }}
+          >
+            <input
+              type="email"
+              placeholder="email (seeded users only)"
+              value={shareFormEmail}
+              onChange={(e) => setShareFormEmail(e.target.value)}
+            />
+            <select
+              value={shareFormRole}
+              onChange={(e) => setShareFormRole(e.target.value as "editor" | "viewer")}
+            >
+              <option value="editor">editor</option>
+              <option value="viewer">viewer</option>
+            </select>
+            <button className="primary" type="submit" disabled={!shareFormEmail.trim()}>
+              Add / Update
+            </button>
+          </form>
+          <p className="hint-inline">Changes apply immediately. Removing a share revokes access.</p>
+          <button onClick={() => setShareOpen(false)}>Close</button>
+        </div>
+      )}
 
       {canEdit && (
         <div className="toolbar">
