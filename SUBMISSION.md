@@ -4,6 +4,8 @@
 
 **Walkthrough video:** skipped (per time constraint). The screenshots below plus this document cover the same ground.
 
+**Demo data on the live site:** in addition to the seeded accounts, Alice owns a pre-shared sample doc ("Q3 AI Enablement Plan", shared with Bob as editor) so the sharing flow is immediately visible. Note the free-tier disk is ephemeral — data resets to this state on each deploy.
+
 ## What's in the folder
 
 | Item | Path |
