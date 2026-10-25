@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: ajaia-doc-editor
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/auth/me
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:////app/data/app.db
