@@ -1,9 +1,10 @@
 import os
 import pathlib
+import tempfile
 
-os.environ["DATABASE_URL"] = "sqlite:///./data/test.db"
-pathlib.Path("data").mkdir(exist_ok=True)
-
+_tmp = tempfile.mkdtemp(prefix="ajaia-test-")
+os.environ["DATABASE_URL"] = f"sqlite:///{_tmp}/test.db"
+pathlib.Path(_tmp).mkdir(exist_ok=True)
 
 import pytest
 from fastapi.testclient import TestClient
