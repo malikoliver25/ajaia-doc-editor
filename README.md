@@ -2,7 +2,7 @@
 
 A lightweight collaborative document editor inspired by Google Docs. Users create rich-text documents, import `.txt`/`.md` files, and share documents with other users as editors or viewers — all persisted in SQLite with role-based access enforced server-side.
 
-**Live URL:** [LIVE_URL]
+**Live URL:** https://ajaia-doc-editor-n58h.onrender.com
 
 ## What it does
 

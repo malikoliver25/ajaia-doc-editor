@@ -1,6 +1,6 @@
 # Submission
 
-**Live URL:** [LIVE_URL] — log in by clicking Alice, Bob, or Carol (or typing `alice@demo.test` / `bob@demo.test` / `carol@demo.test`; mocked email login, no passwords).
+**Live URL:** https://ajaia-doc-editor-n58h.onrender.com — log in by clicking Alice, Bob, or Carol (or typing `alice@demo.test` / `bob@demo.test` / `carol@demo.test`; mocked email login, no passwords).
 
 **Walkthrough video:** skipped (per time constraint). The screenshots below plus this document cover the same ground.
 
@@ -28,7 +28,7 @@
 - Sharing: owner-only dialog, add/update/remove, editor vs viewer roles
 - Owned vs shared list sections with role badges and owner names; empty states
 - Access enforcement: viewers read-only (toolbar hidden), editors can't delete/share, strangers get 404
-- Single Docker image serving API + SPA on one origin; built and verified locally, live deploy pending the Render click-through above
+- Single Docker image serving API + SPA on one origin, deployed to Render (free tier) at the live URL above
 
 ## Tests
 
