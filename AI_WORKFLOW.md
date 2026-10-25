@@ -31,6 +31,3 @@
 - Not verified: behavior under concurrent editors (last-write-wins is known-clobber), files near exactly 1 MB on slow connections, Safari specifics.
 - The doc-list page renders all documents per request (fine at demo scale, O(all docs)).
 
-## [PERSONAL REVIEW]
-
-*(To be filled in by the engineer: your own judgment on the build, anything you changed by hand, and where you disagree with the choices above.)*
